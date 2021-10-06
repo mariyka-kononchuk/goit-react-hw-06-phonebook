@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../redux/actions'
+import * as actions from '../../redux/contacts/contacts-action'
 
 import { v4 as uuidv4 } from 'uuid';
 import data from '../../data/contacts.json'
@@ -88,16 +88,16 @@ function App ({contacts, filter, onAddContact, onDeleteContact, onChangeFilter }
 //имя функции может быть произвольным, главное порядок передачи в connect
 const mapStateToProps = state => {
   return {
-    contacts: state.contacts,
+    contacts: state.items,
     filter: state.filter
   }
 }
 //имя функции может быть произвольным, главное порядок передачи в connect
 const mapDispatchToProps = dispatch => {
   return {
-    onAddContact: () => dispatch(actions.addContact),
-    onDeleteContact: () => dispatch(actions.deleteContact),
-    onChangeFilter: () => dispatch(actions.changeFilter),
+    onAddContact: () => dispatch(actions.addContact()),
+    onDeleteContact: (contactId) => dispatch(actions.deleteContact(contactId)),
+    onChangeFilter: () => dispatch(actions.changeFilter()),
   }
 }
 
