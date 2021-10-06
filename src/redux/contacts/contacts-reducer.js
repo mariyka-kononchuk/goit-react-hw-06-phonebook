@@ -39,7 +39,10 @@ import types from './contacts-types'
 const items = (state = data, {type, payload}) => {
     switch (type) {
         case types.ADD_CONTACT:
-            return [payload,...state];
+            return [payload, ...state];
+        case types.DELETE_CONTACT:
+            return state.filter(contact => contact.id !== payload)
+            
         default:
             return state;
     }
