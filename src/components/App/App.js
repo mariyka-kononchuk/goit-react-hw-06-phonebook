@@ -88,14 +88,14 @@ function App ({contacts, filter, onAddContact, onDeleteContact, onChangeFilter }
 //имя функции может быть произвольным, главное порядок передачи в connect
 const mapStateToProps = state => {
   return {
-    contacts: state.items,
-    filter: state.filter
+    contacts: state.contacts.items,
+    filter: state.contacts.filter
   }
 }
 //имя функции может быть произвольным, главное порядок передачи в connect
 const mapDispatchToProps = dispatch => {
   return {
-    onAddContact: () => dispatch(actions.addContact()),
+    onAddContact: ({name, number}) => dispatch(actions.addContact({name, number})),
     onDeleteContact: (contactId) => dispatch(actions.deleteContact(contactId)),
     onChangeFilter: () => dispatch(actions.changeFilter()),
   }

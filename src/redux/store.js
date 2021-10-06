@@ -1,7 +1,7 @@
 import { createStore, combineReducers} from "redux";
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { itemsReducer, filterReducer } from '../redux/contacts/contacts-reducer'
-
+import contactsReducer from './contacts/contacts-reducer'
 // const initialState = { items: data, filter: '', name: '', number: '', id: '' }
 
 // const reducer = (state = initialState, {type, payload}) => {
@@ -31,8 +31,8 @@ import { itemsReducer, filterReducer } from '../redux/contacts/contacts-reducer'
 
 
 const rootReducer = combineReducers({
-    items: itemsReducer,
-    filter: filterReducer
+    contacts: contactsReducer
+
 })
 
 const store = createStore(rootReducer, composeWithDevTools());
