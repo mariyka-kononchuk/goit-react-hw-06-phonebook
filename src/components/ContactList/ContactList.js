@@ -21,22 +21,19 @@ ContactList.propTypes = {
         })
     ),
 };
-//  getVisibleContacts = () => {
-//     const { contacts, filter } = this.state;
-//     const normilizedFilter = filter.toLowerCase();
-//     return contacts.filter(contact =>
-//       contact.name.toLowerCase().includes(normilizedFilter));
-//   }
+
+ const getVisibleContacts = (allContacts, filter) => {
+    const normilizedFilter = filter.toLowerCase();
+    return allContacts.filter(contact =>
+      contact.name.toLowerCase().includes(normilizedFilter));
+  }
 
 const mapStateToProps = state => {
-    const { filter, items } = state.contacts;
-    const normilizedFilter = filter.toLowerCase();
-    const visibleContacts = items.filter(contact =>
-      contact.name.toLowerCase().includes(normilizedFilter));
-  return {
-    contacts: visibleContacts
+    return {
+        contacts: getVisibleContacts(state.contacts.items, state.contacts.filter)
+    }
   }
-}
+
 
 export default connect(mapStateToProps,null)(ContactList);
 
