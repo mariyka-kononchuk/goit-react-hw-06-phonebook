@@ -1,15 +1,48 @@
 //with Redux Toolkit
-import { configureStore } from "@reduxjs/toolkit";
-import contactsReducer from './contacts/contacts-reducer'
+import { configureStore, getDefaultMiddleware, combineReducers } from "@reduxjs/toolkit";
+import logger from 'redux-logger';
+import {
+    persistStore,
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import contactsReducer from './contacts/contacts-reducer';
 
-const store = configureStore({
-    reducer: {
-        contacts: contactsReducer
-    },
-    devTools: process.env.NODE_ENV === 'development',
+//for watching prevState, action, nextState in console
+const middleware = [...getDefaultMiddleware({
+    serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+    }
+}),
+    logger]
+
+//localStorage
+const persistConfig = {
+    key: 'contacts',
+    storage
+}
+
+const rootReducer = combineReducers({
+    contacts: contactsReducer,
 })
 
-export default store;
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+const store = configureStore({
+    reducer: persistedReducer, 
+    middleware,
+    devTools: process.env.NODE_ENV === 'development',
+})
+//обертка над store, которая реализует обновление LocalStorage
+const persistor = persistStore(store);
+
+export default { store, persistor };
 
 //without Redux Toolkit
 //import { combineReducers } from "redux";
