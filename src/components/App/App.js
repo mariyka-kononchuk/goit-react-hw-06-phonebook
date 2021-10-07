@@ -75,7 +75,7 @@ function App ({contacts, filter, onAddContact, onDeleteContact, onChangeFilter }
       <Container>
         <div>
           <h1 className={s.titlePhonebbok}>Phonebook</h1>
-          {/* <ContactForm onAddContact={onAddContact} /> */}
+          <ContactForm />
           <h2 className={s.titleContacts}>Contacts</h2>
           <Filter value={filter} onChange={onChangeFilter} />
           <ContactList contacts={contacts} onDeleteContact={onDeleteContact} />
