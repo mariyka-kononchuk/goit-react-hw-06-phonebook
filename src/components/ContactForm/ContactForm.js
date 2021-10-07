@@ -76,7 +76,6 @@ ContactForm.propTypes = {
     onAddContact: PropTypes.func.isRequired,
 };
 
-
 const mapDispatchToProps = dispatch => {
   return {
     onAddContact: ({name, number}) => dispatch(actions.addContact({name, number})),

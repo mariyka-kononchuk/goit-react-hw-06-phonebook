@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import s from './ContactList.module.css';
 import ContactListItem from '../ContactListItem';
 
-const ContactList = ({ contacts, onDeleteContact }) => (
+const ContactList = ({contacts}) => (
     <ul className={s.list}>
         {contacts.map((contacts)=> (
             <li key={contacts.id}  >
-                 <ContactListItem contacts={contacts} onDeleteContact={onDeleteContact} />
+                <ContactListItem contacts={contacts}/>
             </li>
         ))}
     </ul>
@@ -19,9 +20,24 @@ ContactList.propTypes = {
             id: PropTypes.string.isRequired,
         })
     ),
-    onDeleteContact:PropTypes.func.isRequired
 };
+//  getVisibleContacts = () => {
+//     const { contacts, filter } = this.state;
+//     const normilizedFilter = filter.toLowerCase();
+//     return contacts.filter(contact =>
+//       contact.name.toLowerCase().includes(normilizedFilter));
+//   }
 
-export default ContactList;
+const mapStateToProps = state => {
+    const { filter, items } = state.contacts;
+    const normilizedFilter = filter.toLowerCase();
+    const visibleContacts = items.filter(contact =>
+      contact.name.toLowerCase().includes(normilizedFilter));
+  return {
+    contacts: visibleContacts
+  }
+}
+
+export default connect(mapStateToProps,null)(ContactList);
 
  
