@@ -27,7 +27,7 @@ class ContactForm extends Component {
         const filterName = this.state.name;
     
         if (this.props.contacts.find(contact => contact.name.toLowerCase() === filterName.toLowerCase())) {
-            alert(`${name} is already in contacts`);
+            alert(`${filterName} is already in contacts`);
             this.reset();
             return;
         }

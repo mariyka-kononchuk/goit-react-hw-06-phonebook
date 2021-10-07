@@ -9,7 +9,5 @@ export default { ADD_CONTACT, DELETE_CONTACT, CHANGE_FILTER };
 // export default {
 //     ADD_CONTACT: 'app/addContact',
 //     DELETE_CONTACT: 'app/deleteContact',
-//     CHANGE_FORM: 'contactForm/change',
 //     CHANGE_FILTER: 'app/changeFilter',
-//     SUBMIT: 'contactForm/submit'
 // }
