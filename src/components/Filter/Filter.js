@@ -16,11 +16,6 @@ const Filter = ({ value, onChange }) => (
     </label>
 )
 
-Filter.propTypes = {
-    value: PropTypes.string,
-    onChange:PropTypes.func.isRequired
-};
-
 const mapStateToProps = state => {
   return {
       value: state.contacts.filter
@@ -33,6 +28,9 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-
-
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+
+Filter.propTypes = {
+    value: PropTypes.string,
+    onChange:PropTypes.func.isRequired
+};

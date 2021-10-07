@@ -20,13 +20,4 @@ export const changeFilter = value => ({
     payload: value
 });
 
-// export const changeForm = value => ({
-//     type: actionTypes.CHANGE_FORM,
-//     payload: value
-// });
-
-// export const submit = value => ({
-//     type: actionTypes.SUBMIT,
-//     payload: value
-// });
 

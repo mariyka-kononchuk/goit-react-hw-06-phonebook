@@ -14,6 +14,20 @@ const ContactList = ({contacts}) => (
     </ul>
 )
 
+ const getVisibleContacts = (allContacts, filter) => {
+    const normilizedFilter = filter.toLowerCase();
+    return allContacts.filter(contact =>
+      contact.name.toLowerCase().includes(normilizedFilter));
+  }
+
+const mapStateToProps = ({contacts:{items, filter}}) => {
+    return {
+        contacts: getVisibleContacts(items, filter)
+    }
+  }
+
+export default connect(mapStateToProps, null)(ContactList);
+
 ContactList.propTypes = {
     contacts: PropTypes.arrayOf(
         PropTypes.shape({
@@ -21,20 +35,5 @@ ContactList.propTypes = {
         })
     ),
 };
-
- const getVisibleContacts = (allContacts, filter) => {
-    const normilizedFilter = filter.toLowerCase();
-    return allContacts.filter(contact =>
-      contact.name.toLowerCase().includes(normilizedFilter));
-  }
-
-const mapStateToProps = state => {
-    return {
-        contacts: getVisibleContacts(state.contacts.items, state.contacts.filter)
-    }
-  }
-
-
-export default connect(mapStateToProps,null)(ContactList);
 
  

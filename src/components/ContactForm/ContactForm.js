@@ -24,6 +24,14 @@ class ContactForm extends Component {
         this.setState({
             [name]: value
         });
+        const filterName = this.state.name;
+    
+        if (this.props.contacts.find(contact => contact.name.toLowerCase() === filterName.toLowerCase())) {
+            alert(`${name} is already in contacts`);
+            this.reset();
+            return;
+        }
+        
         this.props.onAddContact(this.state);
         this.reset();
     }
@@ -69,17 +77,21 @@ class ContactForm extends Component {
         )
     }
 }
-    
-
-
-ContactForm.propTypes = {
-    onAddContact: PropTypes.func.isRequired,
-};
+const mapStateToProps = state => {
+    return {
+        contacts: state.contacts.items
+    }
+}
 
 const mapDispatchToProps = dispatch => {
+   
   return {
     onAddContact: ({name, number}) => dispatch(actions.addContact({name, number})),
   }
 }
 
-export default connect(null,mapDispatchToProps)(ContactForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
+
+ContactForm.propTypes = {
+    onAddContact: PropTypes.func.isRequired,
+};
